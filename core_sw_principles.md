@@ -1,7 +1,7 @@
 # Core Software Design Principles
 
 ## D.R.Y.
-Don't repeat yourself
+Don't repeat yourself<br>
 The prime directive 
 
 ## Use Type Hints

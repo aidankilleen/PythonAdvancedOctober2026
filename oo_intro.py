@@ -16,12 +16,15 @@ class Person():
     def __str__(self):
         return f"id={self.id}\nname={self.name}\nemail={self.email}\n{self.active}"
 
-p6 = Person("ABC123", "Aidan", "aidan@gmail.com", 1234)
+# p6 = Person("ABC123", "Aidan", "aidan@gmail.com", 1234)
 p7 = Person(1, "Alice", "alice@gmail.com", True)
 
 
-def do_something(p:Person):
+r = list(range(10))
+
+def do_something(p:Person) -> None:
     print (f"do something with {p.name}")
+    # return 123
 
 
 do_something(p7)
@@ -49,8 +52,8 @@ p.display()
 
 # p is an instance of the Person class
 print (p.name)
-p2 = Person(2, "Alice", "alice@gmail.com", 1234)
-print (p2.name)
+#p2 = Person(2, "Alice", "alice@gmail.com", 1234)
+#print (p2.name)
 #p3 = Person()
 #p3.id = 1
 #p3.name = "Bob"
