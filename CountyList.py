@@ -26,10 +26,10 @@ cl.add("Clare")
 cl.add("Kerry")
 cl.add("Waterford")
 
-
-# can I slice my custom class
+# can I access an idividual item
 print (cl[4])
 
+# can I slice my custom class
 for county in cl[2:4]:
     print (county)
 
