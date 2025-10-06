@@ -16,9 +16,25 @@ class Person():
     def __str__(self):
         return f"id={self.id}\nname={self.name}\nemail={self.email}\n{self.active}"
 
+    def __eq__(self, other):
+        print ("__eq__ called")
+        if self.id == other.id and self.name == other.name and self.email == other.email and self.active == other.active:
+            return True
+        else: 
+            return False
+        
+
 # p6 = Person("ABC123", "Aidan", "aidan@gmail.com", 1234)
 p7 = Person(1, "Alice", "alice@gmail.com", True)
+p8 = Person(1, "Alice", "alice@gmail.com", True)
 
+if p7 == p8:
+    print ("same")
+else:
+    print ("different")
+
+
+print ("=" * 30)
 
 r = list(range(10))
 
