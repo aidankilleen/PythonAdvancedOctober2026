@@ -2,7 +2,6 @@
 
 from dataclasses import dataclass
 
-
 @dataclass
 class User:
     id: int
@@ -17,4 +16,3 @@ if __name__ == "__main__":
 
     print (u)
 
-    

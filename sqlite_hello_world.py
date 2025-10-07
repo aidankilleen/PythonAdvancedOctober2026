@@ -10,5 +10,5 @@ with sqlite3.connect("./users.db") as con:
     for record in res:
         print (record)
 
-
+# con.close() is implicitly called from here
 

@@ -19,9 +19,7 @@ people = [
 print (people)
 
 #people.sort(key=lambda p: p.name)
-
 people.sort(key=attrgetter("name"), reverse=True)
-
 print (people)
 
 
