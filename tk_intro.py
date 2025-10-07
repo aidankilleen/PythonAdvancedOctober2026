@@ -7,7 +7,7 @@ from UserDAO import UserDAO
 dao = UserDAO()
 
 users = dao.get_all()
-
+   
 print (users)
 
 main_window = tk.Tk()
