@@ -49,12 +49,38 @@ class UserDAO:
         self.conn.execute(sql, params)
         self.conn.commit()
         
+    def update(self, user):
+        sql = """UPDATE users 
+            SET name=?, email=?, active=? 
+            WHERE id=?"""
+        params = (user.name, user.email, 1 if user.active else 0, user.id)
+
+        self.conn.execute(sql, params)
+        self.conn.commit()
+        return user
+
+    def get_by_id(self, id):
+
+        sql = "SELECT * FROM users WHERE id=?"
+        params = (id, )
+
+        cur = self.conn.cursor()
+        cur.execute(sql, params)
+        user = cur.fetchone()
+        if user == None:
+            raise LookupError(f"User {id} not found")
+        else:
+            id, name, email, active = user
+            return User(id, name, email, active)
 
     def close(self):
         self.conn.close()
 
 if __name__ == "__main__":
     dao = UserDAO("./users.db")
+
+    user = dao.get_by_id(9999)
+
 
     new_user = User(-1, "New User", "new.user@gmail.com", True)
     added_user = dao.add(new_user)

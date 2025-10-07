@@ -60,10 +60,39 @@ def test_delete(dao):
     intermediate_count = len(dao.get_all())
 
     assert original_count == intermediate_count - 1
-    
+
     dao.delete(added_user.id)
 
     final_count = len(dao.get_all())
 
     assert original_count == final_count
-    pass
+
+def test_get_by_id_exists(dao):
+
+    user = dao.get_by_id(1)
+    assert user.name == "Alice"
+    
+
+def test_get_by_id_not_exists(dao):
+    # this verifies that a LookupError is raised
+    with pytest.raises(LookupError):
+        user = dao.get_by_id(9999)
+
+
+def test_update(dao):
+
+    # get a user
+    user_to_update = dao.get_by_id(1)
+    # update the user
+    user_to_update.name = "CHANGED"
+
+    dao.update(user_to_update)
+
+    # get the user again
+    updated_user = dao.get_by_id(1)
+
+    # verify changes
+    assert updated_user.name == "CHANGED"
+
+    user_to_update.name = "Alice"
+    dao.update(user_to_update)
