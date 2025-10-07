@@ -5,6 +5,8 @@ import httpx
 import time
 from tqdm.asyncio import tqdm
 
+#from async_timing_decorator import timing
+
 urls = ["https://api.acodingtutor.com/users/1082?_delay=5000", 
         "https://api.acodingtutor.com/users/1084?_delay=2000"]
 
@@ -19,10 +21,11 @@ async def progress(seconds):
             await asyncio.sleep(1)
             pbar.update(1)
 
+
 async def main():
 
     async with httpx.AsyncClient() as client:
-        start_time = time.time()
+        #start_time = time.time()
         t1 = asyncio.create_task(fetch(client, urls[0]))
         t2 = asyncio.create_task(fetch(client, urls[1]))
         pb = asyncio.create_task(progress(5))
@@ -31,7 +34,7 @@ async def main():
         print (data1)
         print (data2)
         
-        end_time = time.time()
-        print (f"function took {end_time - start_time:.5f}s")
+        #end_time = time.time()
+        #print (f"function took {end_time - start_time:.5f}s")
 
 asyncio.run(main())

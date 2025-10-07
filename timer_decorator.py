@@ -6,7 +6,6 @@ import time
 # we may no create many decorators but they are used a lot in some of the libraries we will encounter
 
 
-
 def timing(func):
 
     def wrapper(*args, **kwargs):
@@ -18,19 +17,20 @@ def timing(func):
 
     return wrapper
 
-@timing
-def do_something():
-    print ("starting")
-    time.sleep(5)
-    print ("end")
+if __name__ == "__main__":
+    @timing
+    def do_something():
+        print ("starting")
+        time.sleep(5)
+        print ("end")
 
-do_something()
+    do_something()
 
-@timing
-def do_something_else():
-    t = 0
-    for i in range(100000000):
-        t+=i
-    print (f"Total is {t}") 
+    @timing
+    def do_something_else():
+        t = 0
+        for i in range(100000000):
+            t+=i
+        print (f"Total is {t}") 
 
-do_something_else()
+    do_something_else()
