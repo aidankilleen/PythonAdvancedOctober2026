@@ -5,7 +5,7 @@ import json
 import sys
 from PyQt6.QtWidgets import QApplication, QWidget, QPushButton, QMessageBox, QListWidget, QListWidgetItem, QTextEdit, QLabel
 from PyQt6.QtNetwork import QNetworkAccessManager, QNetworkRequest, QNetworkReply
-from PyQt6.QtCore import QUrl
+from PyQt6.QtCore import Qt, QUrl
 
 
 API_URL = "https://api.acodingtutor.com/users?_delay=5000"
@@ -34,20 +34,27 @@ class App(QWidget):
 
         self.user_list = QListWidget(self)
         self.user_list.move(50, 80)
+        self.user_list.itemClicked.connect(self.on_user_list_item_clicked)
 
+    def on_user_list_item_clicked(self, item):
+        user = item.data(Qt.ItemDataRole.UserRole)
+        QMessageBox.information(self, "You Clicked", str(user))
+        
     def on_fetch_clicked(self):
         reply = self.net.get(QNetworkRequest(QUrl(API_URL)))
         reply.finished.connect(lambda:self.on_done(reply))
         
     def on_done(self, reply):
-
         if reply.error() == QNetworkReply.NetworkError.NoError:
             text = reply.readAll().data().decode("utf-8", "replace")
             data = json.loads(text)
             print(data)
             for user in data:
                 try:
-                    self.user_list.addItem(QListWidgetItem(user['name']))
+                    item = QListWidgetItem(user['name'])
+                    item.setData(Qt.ItemDataRole.UserRole, user)
+                    self.user_list.addItem(item)
+                    
                 except:
                     pass
                 finally:
