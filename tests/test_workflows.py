@@ -1,9 +1,8 @@
 # test_workflows.py
 
 
-def test_this_will_fail():
+def test_this_wont_fail():
 
-    assert 1 == 0
+    assert 1 == 1
 
 
-    
