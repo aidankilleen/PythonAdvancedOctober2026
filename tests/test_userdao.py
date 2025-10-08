@@ -1,11 +1,53 @@
+import os
+import sqlite3
 import pytest
 
 from User import User
 from UserDAO import UserDAO
 
+DB_FILE = "testdatabase.db"
+
+@pytest.fixture(scope="session", autouse=True)
+def setup_database():
+
+    # delete db if it exists
+    if os.path.exists(DB_FILE):
+        os.remove(DB_FILE)
+
+    conn = sqlite3.connect(DB_FILE)
+
+    cursor = conn.cursor()
+
+    sql = """
+    CREATE TABLE "users" (
+	"id"	INTEGER UNIQUE,
+	"name"	TEXT,
+	"email"	TEXT,
+	"active"	INTEGER,
+	PRIMARY KEY("id" AUTOINCREMENT)
+)
+    """
+    cursor.execute(sql)
+
+    sql = "INSERT INTO users (id, name, email, active) VALUES(1, 'Alice', 'alice@gmail.com', True)"
+
+    cursor.execute(sql)
+
+    conn.commit()
+    conn.close()
+
+    yield
+
+    # delete the database
+    #if os.path.exists(DB_FILE):
+    #    os.remove(DB_FILE)
+
+
+
+
 @pytest.fixture
 def dao():
-    dao = UserDAO()
+    dao = UserDAO(DB_FILE)
     try:
         yield dao
     finally:
