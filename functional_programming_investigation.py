@@ -44,7 +44,6 @@ sub = lambda a,b: a-b
 
 print (sub(10, 5))
 
-
 strategies = {
     "add": lambda a,b : a+b, 
     "mul": lambda a,b : a*b,

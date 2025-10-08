@@ -28,8 +28,8 @@ def about():
 @app.route("/members")
 def member():
     dao = UserDAO()
-
     members = dao.get_all()
+    dao.close()
 
     return render_template("members.html", members=members)
 
