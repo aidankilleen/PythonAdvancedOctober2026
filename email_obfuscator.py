@@ -1,5 +1,4 @@
 # email_obfuscator.py
-
 import re
 import sys
 from pathlib import Path
